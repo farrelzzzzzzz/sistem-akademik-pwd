@@ -27,13 +27,57 @@ body {
     justify-content: center;
 }
 
+/* ===== LOGO ===== */
+/* ===== LOGO (FIX: KECIL & TANPA KOTAK) ===== */
 .logo {
-    background-color: #d3d3d3;
-    padding: 10px 30px;
-    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;                 /* hapus padding */
+    background: transparent;    /* hapus kotak */
+    border-radius: 0;
+}
+
+/* Ukuran logo diperkecil */
+.logo img {
+    width: 36px;   /* kecil & profesional */
+    height: 36px;
+    object-fit: contain;
+}
+
+/* Teks logo (jika ada) */
+.logo span {
+    font-size: 16px;
     font-weight: 600;
     color: #333;
+    letter-spacing: 0.3px;
 }
+
+/* Hapus efek hover kotak */
+.logo:hover {
+    background: transparent;
+}
+
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .logo img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .logo span {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo span {
+        display: none; /* mobile: icon saja */
+    }
+}
+
+
 
 .nav-menu {
     display: flex;
@@ -495,4 +539,75 @@ body {
     .footer {
         font-size: 13px;
     }
+}
+
+/* ===== USER DROPDOWN ===== */
+.user-dropdown {
+    position: relative;
+}
+
+.user-btn {
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown box */
+.dropdown-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background-color: white;
+    min-width: 140px;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    display: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+/* Tampilkan dropdown */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Logout button */
+.logout-btn {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #ef4444;
+    font-weight: 600;
+    text-align: left;
+}
+
+.logout-btn:hover {
+    background-color: #fef2f2;
+}
+
+/* ===== HOVER NAV MENU ===== */
+.nav-menu a {
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.25s ease;
+}
+
+/* Garis bawah animasi */
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background-color: #4a7fc1;
+    transition: width 0.25s ease;
+}
+
+/* Hover effect */
+.nav-menu a:hover {
+    color: #4a7fc1;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
 }

@@ -66,16 +66,23 @@ if (mysqli_num_rows($cekNilai) > 0) {
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Mahasiswa</title>
     <link rel="stylesheet" href="css/role_mahasiswa.css">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="logo">Logo</div>
+        <div class="logo">
+            <img src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/yw6YVzfcvO/dqwa66oo_expires_30_days.png" alt="Logo">
+            <span>Portal Akademik
+        </div>
+
+        </div>
         <div class="nav-wrapper">
             <div class="nav-menu">
                 <a href="#">Dashboard</a>
@@ -84,10 +91,18 @@ if (mysqli_num_rows($cekNilai) > 0) {
                 <a href="#">Nilai</a>
             </div>
         </div>
-        <div class="user-btn">
-            <div class="user-icon">👤</div>
-            <span><?= htmlspecialchars($nama) ?></span>
+        <div class="user-dropdown">
+            <button class="user-btn" id="userBtn">
+                <div class="user-icon">👤</div>
+                <span><?= htmlspecialchars($nama) ?></span>
+            </button>
+
+            <div class="dropdown-menu" id="dropdownMenu">
+            <a href="logout.php"class="logout-btn">Logout</a>
+
+            </div>
         </div>
+
     </nav>
 
     <!-- Hero Section -->
@@ -100,24 +115,24 @@ if (mysqli_num_rows($cekNilai) > 0) {
 
     <!-- Stats Cards -->
     <!-- Stats -->
-<div class="stats-container">
-    <div class="stat-card">
-        <div class="stat-label">Status Mahasiswa</div>
-        <div class="stat-value"><?= $status ?></div>
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-label">Status Mahasiswa</div>
+            <div class="stat-value"><?= $status ?></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">IP Komulatif</div>
+            <div class="stat-value"><?= $ipk ?></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Jumlah SKS</div>
+            <div class="stat-value"><?= $sks ?></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Semester</div>
+            <div class="stat-value"><?= $semester ?></div>
+        </div>
     </div>
-    <div class="stat-card">
-        <div class="stat-label">IP Komulatif</div>
-        <div class="stat-value"><?= $ipk ?></div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-label">Jumlah SKS</div>
-        <div class="stat-value"><?= $sks ?></div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-label">Semester</div>
-        <div class="stat-value"><?= $semester ?></div>
-    </div>
-</div>
 
     <!-- Information Section -->
     <section class="info-section">
@@ -178,4 +193,20 @@ if (mysqli_num_rows($cekNilai) > 0) {
         <div>Copyright @ 2025 Sistem Akademik</div>
     </footer>
 </body>
+
+<script>
+    const userBtn = document.getElementById('userBtn');
+    const dropdown = document.getElementById('dropdownMenu');
+
+    userBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', function () {
+        dropdown.classList.remove('show');
+    });
+</script>
+
+
 </html>
