@@ -1,0 +1,181 @@
+<?php
+session_start();
+include 'koneksi.php';
+
+/* ================== AUTH ================== */
+if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'mahasiswa') {
+    header("Location: login.php");
+    exit;
+}
+
+
+/* ================== IDENTITAS ================== */
+$nim = $_SESSION['user_id'];
+
+/* ================== DATA MAHASISWA (YANG SUDAH ADA) ================== */
+$qMhs = mysqli_query($conn, "
+    SELECT nama
+    FROM mahasiswa
+    WHERE nim = '$nim'
+");
+$mhs = mysqli_fetch_assoc($qMhs);
+
+$nama = $mhs['nama'] ?? 'Mahasiswa';
+
+/* ================== DEFAULT (AMAN UNTUK MAHASISWA BARU) ================== */
+$status   = 'AKTIF';
+$ipk      = '0.00';
+$sks      = '0';
+$semester = '1';
+
+/* ================== FUTURE-PROOF (NANTI AKTIF SENDIRI) ==================
+   Jangan dihapus. Ini DISENGAJA disiapkan.
+   Kalau tabelnya belum ada, query tidak dijalankan.
+========================================================================== */
+
+/* === TOTAL SKS (dari KRS) === */
+$cekKrs = mysqli_query($conn, "SHOW TABLES LIKE 'krs'");
+if (mysqli_num_rows($cekKrs) > 0) {
+    $qSks = mysqli_query($conn, "
+        SELECT IFNULL(SUM(kd.sks),0) AS total_sks
+        FROM krs_detail kd
+        JOIN krs k ON kd.id_krs = k.id
+        WHERE k.nim='$nim' AND k.status='disetujui'
+    ");
+    if ($qSks) {
+        $d = mysqli_fetch_assoc($qSks);
+        $sks = $d['total_sks'];
+    }
+}
+
+/* === IPK (dari NILAI) === */
+$cekNilai = mysqli_query($conn, "SHOW TABLES LIKE 'nilai'");
+if (mysqli_num_rows($cekNilai) > 0) {
+    $qIpk = mysqli_query($conn, "
+        SELECT ROUND(SUM(nilai_bobot*sks)/SUM(sks),2) AS ipk
+        FROM nilai
+        WHERE nim='$nim'
+    ");
+    if ($qIpk) {
+        $d = mysqli_fetch_assoc($qIpk);
+        $ipk = $d['ipk'] ?? '0.00';
+    }
+}
+?>
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Mahasiswa</title>
+    <link rel="stylesheet" href="css/role_mahasiswa.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">Logo</div>
+        <div class="nav-wrapper">
+            <div class="nav-menu">
+                <a href="#">Dashboard</a>
+                <a href="#">Matakuliah</a>
+                <a href="#">Krs</a>
+                <a href="#">Nilai</a>
+            </div>
+        </div>
+        <div class="user-btn">
+            <div class="user-icon">👤</div>
+            <span><?= htmlspecialchars($nama) ?></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Selamat Datang</h1>
+            <p><?= htmlspecialchars($nama) ?></p>
+        </div>
+    </section>
+
+    <!-- Stats Cards -->
+    <!-- Stats -->
+<div class="stats-container">
+    <div class="stat-card">
+        <div class="stat-label">Status Mahasiswa</div>
+        <div class="stat-value"><?= $status ?></div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">IP Komulatif</div>
+        <div class="stat-value"><?= $ipk ?></div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Jumlah SKS</div>
+        <div class="stat-value"><?= $sks ?></div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Semester</div>
+        <div class="stat-value"><?= $semester ?></div>
+    </div>
+</div>
+
+    <!-- Information Section -->
+    <section class="info-section">
+        <div class="section-header">
+            <div class="info-icon">i</div>
+            <h2 class="section-title">Informasi Akademik</h2>
+        </div>
+        <div class="info-content">
+            <p class="info-subtitle">Info SIMERU :</p>
+            <ul>
+                <li>Surat izin perkuliahan, mahasiswa juga wajib mengisi form online ini atau bisa akses link ini goo.gl/VHN6q1 Setelah registrasi online, silahkan datang ke Disduk untuk verifikasi dan mendapatkan stempel pada surat dan dedokumentasikan. Data harus sesuai dengan surat ijin dan ketentuan WR I tentang perkuliahan.</li>
+                <li>Untuk menghindari antrian, manfaatkan loket bank untuk pembayaran SPP, BRI, BSM, BNI Syariah, Bukopin Bank, BPD DIY (tanpa membawa formulir atau menyebut mailai ATM)</li>
+                <li>Perhatian khusus untuk mahasiswa(i), pastikan bahwa tidak ada kekurangan pembayaran semester sebelumnya (sajikan Rp. 0,-), karna ada kemungkinan masalah pada waktu pengecekan sidang atau dinyatakan tidak dapat dinyatakan ujian skripsi.</li>
+            </ul>
+            <p class="info-subtitle">Kontak Staff Keuangan :</p>
+            <ul>
+                <li>Jika ada permasalahan keuangan yang belum jelas, silakan menghubungi hotline WA bagian keuangan di WA 0856-0007-0737</li>
+            </ul>
+            <p class="info-subtitle">Kontak Person Bank :</p>
+            <ul>
+                <li>BRI : Bapak Brata (+62 878-3919-7536)</li>
+                <li>BNI Syariah : Bapak Kerti (+62 821-3656-6768)</li>
+                <li>BSM : Afri Yulianto (+62 819-6556-582)</li>
+                <li>BPD : Bapak Prima (+62 811-259-060)</li>
+            </ul>
+            <p class="info-subtitle">Info Pengambilan KTM :</p>
+            <ul>
+                <li>Pengambilan KTM mahasiswa wajib mengisi form online melalui link suad.id/ambil_KTM</li>
+                <li>Pengambilan KTM akan dinformasikan via whatsapp oleh petugas setelah pengisian form. Apabila belum ada konfirmasi dari petugas selama 2x24 jam, silahkan hub nomor +62 815-5347-3023</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="section-header">
+            <div class="info-icon">📰</div>
+            <h2 class="section-title">Berita Acara</h2>
+        </div>
+        <div class="news-card">
+            <div class="news-image">📢</div>
+            <div class="news-content">
+                <h3>PENDAFTARAN PELATIHAN SOFTSKILLS TAHAP 1 TAHUN 2025</h3>
+                <p>Assalamu'alaikum wr. wb. Hai Dahlan Muda! Kami sampaikan untuk pendaftaran Pelatihan Soft Skills Tahap 1 Tahun 2025 dapat dilakukan mulai Hari : Senin s.d Ahad</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-icons">
+            <span>Sosial Media:</span>
+            <a href="#" class="social-icon">📱</a>
+            <a href="#" class="social-icon">▶️</a>
+            <a href="#" class="social-icon">📞</a>
+            <a href="#" class="social-icon">✉️</a>
+        </div>
+        <div>Copyright @ 2025 Sistem Akademik</div>
+    </footer>
+</body>
+</html>

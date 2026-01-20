@@ -1,0 +1,498 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Header Navigation */
+.navbar {
+    background-color: white;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex: 1;
+    justify-content: center;
+}
+
+.logo {
+    background-color: #d3d3d3;
+    padding: 10px 30px;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #333;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.user-btn {
+    background-color: #4a7fc1;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-icon {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4a7fc1;
+    font-size: 12px;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url('../asset/bg_das_mhs.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 5% 120px 5%;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../asset/bg_das_mhs.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6;
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    margin: 0;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+/* Stats Cards */
+.stats-container {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 30px 5% 40px 5%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2%;
+}
+
+.stat-card {
+    background-color: #4a7fc1;
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.stat-label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    opacity: 0.95;
+}
+
+.stat-value {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Info Section */
+.info-section {
+    max-width: 100%;
+    width: 100%;
+    margin: 40px 0;
+    padding: 0 5%;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.info-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #4a7fc1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+}
+
+.info-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-subtitle {
+    font-weight: 700;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    color: #333;
+}
+
+.info-subtitle:first-child {
+    margin-top: 0;
+}
+
+.info-content ul {
+    margin-left: 20px;
+    color: #555;
+    line-height: 1.8;
+}
+
+.info-content ul li {
+    margin-bottom: 15px;
+}
+
+/* News Section */
+.news-section {
+    max-width: 100%;
+    width: 100%;
+    margin: 40px 0;
+    padding: 0 5%;
+}
+
+.news-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.news-image {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #1a4d8f 0%, #2563a8 100%);
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.news-content h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.news-content p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* Footer */
+.footer {
+    background-color: #4a7fc1;
+    color: white;
+    padding: 20px 5%;
+    text-align: center;
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    color: #4a7fc1;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .navbar {
+        padding: 15px 4%;
+    }
+
+    .hero {
+        padding: 70px 4% 110px 4%;
+    }
+
+    .stats-container,
+    .info-section,
+    .news-section {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .footer {
+        padding: 20px 4%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .navbar {
+        padding: 12px 3%;
+    }
+
+    .nav-menu {
+        gap: 20px;
+    }
+
+    .hero {
+        padding: 60px 3% 100px 3%;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero p {
+        font-size: 28px;
+    }
+
+    .stats-container {
+        padding: 25px 3% 35px 3%;
+    }
+
+    .stat-value {
+        font-size: 56px;
+    }
+
+    .info-section,
+    .news-section {
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+
+    .footer {
+        padding: 20px 3%;
+    }
+}
+
+@media (max-width: 992px) {
+    .nav-menu a {
+        font-size: 14px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero p {
+        font-size: 26px;
+    }
+
+    .stat-card {
+        padding: 25px;
+    }
+
+    .stat-value {
+        font-size: 52px;
+    }
+
+    .news-image {
+        width: 180px;
+        height: 180px;
+        font-size: 42px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+
+    .nav-menu {
+        gap: 15px;
+        font-size: 13px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 50px 20px 80px 20px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 24px;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+        padding: 20px 20px 30px 20px;
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .stat-value {
+        font-size: 48px;
+    }
+
+    .info-section,
+    .news-section {
+        padding: 0 20px;
+    }
+
+    .info-content {
+        padding: 20px;
+    }
+
+    .news-card {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .news-image {
+        width: 100%;
+        height: 150px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+
+    .nav-menu a {
+        font-size: 12px;
+    }
+
+    .user-btn {
+        padding: 6px 15px;
+        font-size: 14px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 20px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+    }
+
+    .stat-value {
+        font-size: 42px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .info-content {
+        padding: 15px;
+    }
+
+    .info-content ul {
+        margin-left: 15px;
+        font-size: 13px;
+    }
+
+    .news-content h3 {
+        font-size: 14px;
+    }
+
+    .news-content p {
+        font-size: 13px;
+    }
+
+    .social-icons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer {
+        font-size: 13px;
+    }
+}
