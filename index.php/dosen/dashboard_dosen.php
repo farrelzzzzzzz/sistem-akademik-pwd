@@ -40,8 +40,7 @@ $totalMahasiswa = $dataMahasiswa['total'];
     <div class="nav-menu">
         <a href="dashboard_dosen.php">Dashboard</a>
         <a href="mahasiswa.php">Data Mahasiswa</a>
-        <a href="#">Input Nilai</a>
-        <a href="#">Mata Kuliah</a>
+        <a href="input_nilai.php">Input Nilai</a>
         <a href="logout.php">Logout</a>
     </div>
 </nav>
@@ -63,8 +62,8 @@ $totalMahasiswa = $dataMahasiswa['total'];
         <div class="stat-value"><?= $totalMahasiswa ?></div>
     </div>
     <div class="stat-card">
-        <div class="stat-label">Mata Kuliah</div>
-        <div class="stat-value">0</div>
+        <div class="stat-label">Status:</div>
+        <div class="stat-value">Aktif</div>
     </div>
 </section>
 

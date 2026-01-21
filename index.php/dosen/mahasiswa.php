@@ -102,8 +102,7 @@ $data = mysqli_query($conn, "
     <div class="nav-menu">
         <a href="dashboard_dosen.php">Dashboard</a>
         <a href="mahasiswa.php" style="font-weight:600;color:#4a7fc1;">Data Mahasiswa</a>
-        <a href="#">Input Nilai</a>
-        <a href="#">Mata Kuliah</a>
+        <a href="input_nilai.php">Input Nilai</a>
         <a href="logout.php">Logout</a>
     </div>
 </nav>
