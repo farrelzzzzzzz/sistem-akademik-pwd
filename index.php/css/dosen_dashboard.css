@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: white;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+    background-color: #d3d3d3;
+    padding: 10px 30px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.nav-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.user-btn {
+    background-color: #4a7fc1;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.user-icon {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    color: #4a7fc1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+/* HERO */
+.hero {
+    background-image: url('../asset/bg_das_dosen.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 5% 120px;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 48px;
+}
+
+.hero p {
+    font-size: 32px;
+}
+
+/* STAT */
+.stats-container {
+    padding: 30px 5%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background-color: #4a7fc1;
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 64px;
+    font-weight: bold;
+}
+
+/* INFO */
+.info-section {
+    padding: 0 5%;
+    margin-top: 40px;
+}
+
+.section-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.info-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #4a7fc1;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.info-content ul {
+    margin-left: 20px;
+    line-height: 1.8;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 60px;
+    background-color: #4a7fc1;
+    color: white;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*gambar*/
+.hero-dosen {
+    position: relative;
+    height: 350px;
+     background-image: url('../asset/bg_login.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 60px;
+    color: white;
+}
+
+/* overlay biar teks kebaca */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* konten di atas overlay */
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 22px;
+}

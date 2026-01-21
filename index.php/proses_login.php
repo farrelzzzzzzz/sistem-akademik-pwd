@@ -27,7 +27,7 @@ if(mysqli_num_rows($query) == 1){
         }
     
         if($user['role'] === 'dosen'){
-            header("Location: dosen_role.php");
+            header("Location: dosen/dashboard_dosen.php");
             exit;
         }
         

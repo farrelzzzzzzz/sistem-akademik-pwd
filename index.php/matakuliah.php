@@ -91,7 +91,7 @@ $result->data_seek(0); // reset pointer
                 <a href="mhs_role.php">Dashboard</a>
                 <a href="matakuliah.php">Matakuliah</a>
                 <a href="krs.php">Krs</a>
-                <a href="#">Nilai</a>
+                <a href="nilai.php">Nilai</a>
             </div>
         </div>
 

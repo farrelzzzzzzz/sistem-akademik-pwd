@@ -71,5 +71,16 @@ CREATE TABLE krs_detail (
 ALTER TABLE krs 
 ADD COLUMN status ENUM('disetujui','pending') NOT NULL DEFAULT 'pending';
 
+ALTER TABLE nilai 
+MODIFY nilai VARCHAR(2);
 
+--tambahan
+CREATE TABLE dosen_mahasiswa (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_dosen VARCHAR(20),
+    nim VARCHAR(20)
+);
 
+DS2002
+DS2002@0604200
+litnil wkwkwkkw oyiow  
