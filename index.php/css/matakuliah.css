@@ -407,6 +407,9 @@ tr:nth-child(even) {
     cursor: pointer;
 }
 
+
+
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .navbar {
@@ -541,3 +544,5 @@ tr:nth-child(even) {
         font-size: 12px;
     }
 }
+
+

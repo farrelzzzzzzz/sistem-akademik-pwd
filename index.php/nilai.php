@@ -107,7 +107,11 @@ $ipk = $ipkData['ipk'] ?? '0.00';
             <?php endif; ?>
         </tbody>
     </table>
+    <a href="nilai_pdf.php" target="_blank" class="btn-pdf">Export PDF</a>
 </div>
+
+
+
 
 <script>
         function toggleDropdown() {
