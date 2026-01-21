@@ -9,18 +9,15 @@ if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'mahasiswa') {
 }
 
 
-/* ================== IDENTITAS ================== */
 $nim = $_SESSION['user_id'];
 
-/* ================== DATA MAHASISWA (YANG SUDAH ADA) ================== */
-$qMhs = mysqli_query($conn, "
-    SELECT nama
-    FROM mahasiswa
-    WHERE nim = '$nim'
-");
+// Ambil id_mahasiswa dari tabel mahasiswa
+$qMhs = mysqli_query($conn, "SELECT id, nama FROM mahasiswa WHERE nim='$nim'");
 $mhs = mysqli_fetch_assoc($qMhs);
 
+$id_mahasiswa = $mhs['id']; // <-- ini penting untuk query krs
 $nama = $mhs['nama'] ?? 'Mahasiswa';
+
 
 /* ================== DEFAULT (AMAN UNTUK MAHASISWA BARU) ================== */
 $status   = 'AKTIF';
@@ -34,28 +31,35 @@ $semester = '1';
 ========================================================================== */
 
 /* === TOTAL SKS (dari KRS) === */
+/* === TOTAL SKS (dari KRS) === */
 $cekKrs = mysqli_query($conn, "SHOW TABLES LIKE 'krs'");
 if (mysqli_num_rows($cekKrs) > 0) {
     $qSks = mysqli_query($conn, "
-        SELECT IFNULL(SUM(kd.sks),0) AS total_sks
-        FROM krs_detail kd
-        JOIN krs k ON kd.id_krs = k.id
-        WHERE k.nim='$nim' AND k.status='disetujui'
+        SELECT IFNULL(SUM(m.sks),0) AS total_sks
+        FROM krs k
+        JOIN matakuliah m ON k.id_matakuliah = m.id
+        WHERE k.id_mahasiswa = '$id_mahasiswa'
     ");
+
     if ($qSks) {
         $d = mysqli_fetch_assoc($qSks);
         $sks = $d['total_sks'];
     }
 }
 
+
+
 /* === IPK (dari NILAI) === */
 $cekNilai = mysqli_query($conn, "SHOW TABLES LIKE 'nilai'");
 if (mysqli_num_rows($cekNilai) > 0) {
     $qIpk = mysqli_query($conn, "
-        SELECT ROUND(SUM(nilai_bobot*sks)/SUM(sks),2) AS ipk
-        FROM nilai
-        WHERE nim='$nim'
-    ");
+    SELECT ROUND(SUM(n.nilai_bobot*m.sks)/SUM(m.sks),2) AS ipk
+    FROM nilai n
+    JOIN matakuliah m ON n.id_matakuliah = m.id
+    JOIN mahasiswa ma ON n.id_mahasiswa = ma.id
+    WHERE ma.nim='$nim'
+");
+
     if ($qIpk) {
         $d = mysqli_fetch_assoc($qIpk);
         $ipk = $d['ipk'] ?? '0.00';
@@ -85,9 +89,9 @@ if (mysqli_num_rows($cekNilai) > 0) {
         </div>
         <div class="nav-wrapper">
             <div class="nav-menu">
-                <a href="#">Dashboard</a>
-                <a href="#">Matakuliah</a>
-                <a href="#">Krs</a>
+                <a href="mhs_role.php">Dashboard</a>
+                <a href="matakuliah.php">Matakuliah</a>
+                <a href="krs.php">Krs</a>
                 <a href="#">Nilai</a>
             </div>
         </div>
@@ -98,7 +102,7 @@ if (mysqli_num_rows($cekNilai) > 0) {
             </button>
 
             <div class="dropdown-menu" id="dropdownMenu">
-            <a href="logout.php"class="logout-btn">Logout</a>
+                <a href="logout.php" class="logout-btn">Logout</a>
 
             </div>
         </div>
@@ -198,12 +202,12 @@ if (mysqli_num_rows($cekNilai) > 0) {
     const userBtn = document.getElementById('userBtn');
     const dropdown = document.getElementById('dropdownMenu');
 
-    userBtn.addEventListener('click', function (e) {
+    userBtn.addEventListener('click', function(e) {
         e.stopPropagation();
         dropdown.classList.toggle('show');
     });
 
-    document.addEventListener('click', function () {
+    document.addEventListener('click', function() {
         dropdown.classList.remove('show');
     });
 </script>
